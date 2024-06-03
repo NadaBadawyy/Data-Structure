@@ -1,0 +1,3 @@
+C:/Users/Nada/CLionProjects/1 RIV sorting alg/cmake-build-debug/CMakeFiles/1_RIV_sorting_alg_.dir
+C:/Users/Nada/CLionProjects/1 RIV sorting alg/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Nada/CLionProjects/1 RIV sorting alg/cmake-build-debug/CMakeFiles/rebuild_cache.dir

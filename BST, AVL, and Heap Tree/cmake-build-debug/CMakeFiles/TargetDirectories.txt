@@ -1,0 +1,3 @@
+C:/Users/Nada/CLionProjects/2_TREES/cmake-build-debug/CMakeFiles/2_TREES.dir
+C:/Users/Nada/CLionProjects/2_TREES/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Nada/CLionProjects/2_TREES/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,589 +1,666 @@
 #include <iostream>
 using namespace std;
-template<typename t>
-class node{
 
+// Node class for representing a node in linked list and other data structures
+template<typename t>
+class node {
 public:
-    t data;
-    node*next;
-    node*prev;
-    node(){
-        next= nullptr;
-        prev= nullptr;
+    t data;         // Data of the node
+    node* next;     // Pointer to the next node
+    node* prev;     // Pointer to the previous node (used in doubly linked list)
+    
+    // Default constructor
+    node() {
+        next = nullptr;
+        prev = nullptr;
     }
-    node(t val){
-        data=val;
-        next= nullptr;
-        prev= nullptr;
+    
+    // Parameterized constructor
+    node(t val) {
+        data = val;
+        next = nullptr;
+        prev = nullptr;
     }
 };
+
+// Linked List class
 template<typename t>
-class linkedlist{
-    node<t>*head;
+class linkedlist {
+    node<t>* head;  // Head pointer for the linked list
 public:
-    linkedlist(){
-        head== nullptr;
+    // Constructor
+    linkedlist() {
+        head = nullptr;
     }
-    bool isempty(){
-        return head== nullptr;
+    
+    // Check if the linked list is empty
+    bool isempty() {
+        return head == nullptr;
     }
-    bool isfound(t val){
-        node<t>*temp=head;
-        bool f=0;
-        while(temp!= nullptr){
-            if(temp->data==val){
-                f=1;
+    
+    // Check if a value is found in the linked list
+    bool isfound(t val) {
+        node<t>* temp = head;
+        bool found = false;
+        while (temp != nullptr) {
+            if (temp->data == val) {
+                found = true;
                 break;
             }
-            temp=temp->next;
+            temp = temp->next;
         }
-       return f;
+        return found;
     }
-    void insertfirst(t val){
-        if(isempty()){
-            node<t>*newnode=new node<t>(val);
-            head=newnode;
-        }
-        else{
-            node<t>*newnode=new node<t>(val);
-            newnode->next=head;
-            head=newnode;
+    
+    // Insert a new node at the beginning of the linked list
+    void insertfirst(t val) {
+        if (isempty()) {
+            node<t>* newnode = new node<t>(val);
+            head = newnode;
+        } else {
+            node<t>* newnode = new node<t>(val);
+            newnode->next = head;
+            head = newnode;
         }
     }
-    void insertlast(t val){
-        node<t>*temp=head;
-        node<t>*newnode=new node<t>(val);
-        while(temp->next!= nullptr){
-            temp=temp->next;
+    
+    // Insert a new node at the end of the linked list
+    void insertlast(t val) {
+        node<t>* temp = head;
+        node<t>* newnode = new node<t>(val);
+        while (temp->next != nullptr) {
+            temp = temp->next;
         }
-        temp->next=newnode;
-
+        temp->next = newnode;
     }
-    void insertbefore( t val, t item){
-        if(isfound(val)){
-            if(head->data==val){
+    
+    // Insert a new node before a specific value
+    void insertbefore(t val, t item) {
+        if (isfound(val)) {
+            if (head->data == val) {
                 insertfirst(item);
                 return;
             }
-            node<t>*temp=head;
-            node<t>*prev= nullptr;
-            while(temp->data!=val){
-                prev=temp;
-                temp=temp->next;
+            node<t>* temp = head;
+            node<t>* prev = nullptr;
+            while (temp->data != val) {
+                prev = temp;
+                temp = temp->next;
             }
-            node<t>*newnode=new node<t>(item);
-            prev->next=newnode;
-            newnode->next=temp;
-
-        }
-        else{
-            cout<<"the item is not founddd\n";
+            node<t>* newnode = new node<t>(item);
+            prev->next = newnode;
+            newnode->next = temp;
+        } else {
+            cout << "The item is not found\n";
         }
     }
-    void insert(int idx, t val){
-        int index=-1;
-        if(idx>count()|| idx<0)
-            cout<<"out of range!!\n";
-        else{
-            if(idx==0){
+    
+    // Insert a new node at a specific index
+    void insert(int idx, t val) {
+        int index = -1;
+        if (idx > count() || idx < 0)
+            cout << "Out of range!!\n";
+        else {
+            if (idx == 0) {
                 insertfirst(val);
-            }
-            else if(idx==count()){
+            } else if (idx == count()) {
                 insertlast(val);
-
-            }
-            else{
-                node<t>*prev=head;
-                while(index!=idx-2){
+            } else {
+                node<t>* prev = head;
+                while (index != idx - 2) {
                     index++;
-                    prev=prev->next;
+                    prev = prev->next;
                 }
-                node<t>*newnode=new node<t>(val);
-                newnode->next=prev->next;
-                prev->next=newnode;
+                node<t>* newnode = new node<t>(val);
+                newnode->next = prev->next;
+                prev->next = newnode;
             }
-
         }
     }
-    int count(){
-        node<t>*temp=head;
-        int cnt=0;
-        while(temp!= nullptr){
+    
+    // Count the number of nodes in the linked list
+    int count() {
+        node<t>* temp = head;
+        int cnt = 0;
+        while (temp != nullptr) {
             cnt++;
-            temp=temp->next;
+            temp = temp->next;
         }
         return cnt;
     }
-    void display(){
-        node<t>*temp=head;
-        while(temp!= nullptr){
-            cout<<temp->data<<" ";
-            temp=temp->next;
+    
+    // Display the linked list
+    void display() {
+        node<t>* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
-    void deletefirst(){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else{
-            node<t>*temp=head;
-            head=head->next;
+    
+    // Delete the first node in the linked list
+    void deletefirst() {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else {
+            node<t>* temp = head;
+            head = head->next;
             delete temp;
         }
     }
-    void deletelast(){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else{
-            node<t>*temp=head,*prev= nullptr;
-            while(temp->next!= nullptr){
-                prev=temp;
-                temp=temp->next;
+    
+    // Delete the last node in the linked list
+    void deletelast() {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else {
+            node<t>* temp = head, * prev = nullptr;
+            while (temp->next != nullptr) {
+                prev = temp;
+                temp = temp->next;
             }
-            prev->next=temp->next;
+            prev->next = temp->next;
             delete temp;
         }
     }
-    void delette(t val){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else if(!isfound(val)){
-            cout<<"the item is not foundd!!\n";
-        }
-        else if(head->data==val){
+    
+    // Delete a node with a specific value
+    void delette(t val) {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else if (!isfound(val)) {
+            cout << "The item is not found!!\n";
+        } else if (head->data == val) {
             deletefirst();
-        }
-        else{
-            node<t>*temp=head,*prev= nullptr;
-            while( temp->data!=val){
-                prev=temp;
-                temp=temp->next;
+        } else {
+            node<t>* temp = head, * prev = nullptr;
+            while (temp->data != val) {
+                prev = temp;
+                temp = temp->next;
             }
-            prev->next=temp->next;
+            prev->next = temp->next;
             delete temp;
         }
     }
-    int search(int val){
-        int f=0;
-        if(!isfound(val))
+    
+    // Search for a value and return its index
+    int search(int val) {
+        int index = 0;
+        if (!isfound(val))
             return -1;
-        node<t>*temp=head;
-        while(temp->data!=val){
-            f++;
-            temp=temp->next;
+        node<t>* temp = head;
+        while (temp->data != val) {
+            index++;
+            temp = temp->next;
         }
-        return f;
+        return index;
     }
 };
+
+// Doubly Linked List class
 template<typename t>
-class doublylinkedlist{
-node<t>*head;
-node<t>*last;
+class doublylinkedlist {
+    node<t>* head;  // Head pointer for the doubly linked list
+    node<t>* last;  // Last pointer for the doubly linked list
 public:
-    doublylinkedlist(){
-        head= nullptr;
-        last= nullptr;
+    // Constructor
+    doublylinkedlist() {
+        head = nullptr;
+        last = nullptr;
     }
-    bool isempty(){
-        return head== nullptr&&last== nullptr;
+    
+    // Check if the doubly linked list is empty
+    bool isempty() {
+        return head == nullptr && last == nullptr;
     }
-    bool isfound(t val){
-        node<t>*temp=head;
-        bool f=0;
-        while(temp!= nullptr){
-            if(temp->data==val){
-                f=1;
+    
+    // Check if a value is found in the doubly linked list
+    bool isfound(t val) {
+        node<t>* temp = head;
+        bool found = false;
+        while (temp != nullptr) {
+            if (temp->data == val) {
+                found = true;
                 break;
             }
-            temp=temp->next;
+            temp = temp->next;
         }
-        return f;
+        return found;
     }
-    void insertfirst(t val){
-        if(isempty()){
-            node<t>*newnode=new node<t>(val);
-            head=newnode;
-            last=newnode;
-        }
-        else{
-            node<t>*newnode=new node<t>(val);
-            newnode->next=head;
-            head->prev=newnode;
-            head=newnode;
+    
+    // Insert a new node at the beginning of the doubly linked list
+    void insertfirst(t val) {
+        if (isempty()) {
+            node<t>* newnode = new node<t>(val);
+            head = newnode;
+            last = newnode;
+        } else {
+            node<t>* newnode = new node<t>(val);
+            newnode->next = head;
+            head->prev = newnode;
+            head = newnode;
         }
     }
-    void insertlast(t val){
-        node<t>*temp=head;
-        node<t>*newnode=new node<t>(val);
-        while(temp->next!= nullptr){
-            temp=temp->next;
+    
+    // Insert a new node at the end of the doubly linked list
+    void insertlast(t val) {
+        node<t>* temp = head;
+        node<t>* newnode = new node<t>(val);
+        while (temp->next != nullptr) {
+            temp = temp->next;
         }
-        temp->next=newnode;
-        newnode->prev=temp;
-        last=newnode;
-
+        temp->next = newnode;
+        newnode->prev = temp;
+        last = newnode;
     }
-    void insertbefore( t val, t item){
-        if(isfound(val)){
-            if(head->data==val){
+    
+    // Insert a new node before a specific value
+    void insertbefore(t val, t item) {
+        if (isfound(val)) {
+            if (head->data == val) {
                 insertfirst(item);
                 return;
             }
-            node<t>*temp=head;
-            node<t>*prv= nullptr;
-            while(temp->data!=val){
-                prv=temp;
-                temp=temp->next;
+            node<t>* temp = head;
+            node<t>* prev = nullptr;
+            while (temp->data != val) {
+                prev = temp;
+                temp = temp->next;
             }
-            node<t>*newnode=new node<t>(item);
-            prv->next=newnode;
-            newnode->next=temp;
-            temp->prev=newnode;
-            newnode->prev=prv;
-        }
-        else{
-            cout<<"the item is not founddd\n";
+            node<t>* newnode = new node<t>(item);
+            prev->next = newnode;
+            newnode->next = temp;
+            temp->prev = newnode;
+            newnode->prev = prev;
+        } else {
+            cout << "The item is not found\n";
         }
     }
-    void insert(int idx, t val){
-        int index=-1;
-        if(idx>count()|| idx<0)
-            cout<<"out of range!!\n";
-        else{
-            if(idx==0){
+    
+    // Insert a new node at a specific index
+    void insert(int idx, t val) {
+        int index = -1;
+        if (idx > count() || idx < 0)
+            cout << "Out of range!!\n";
+        else {
+            if (idx == 0) {
                 insertfirst(val);
-            }
-            else if(idx==count()){
+            } else if (idx == count()) {
                 insertlast(val);
-
-            }
-            else{
-                node<t>*prev=head;
-                while(index!=idx-2){
+            } else {
+                node<t>* prev = head;
+                while (index != idx - 2) {
                     index++;
-                    prev=prev->next;
+                    prev = prev->next;
                 }
-                node<t>*newnode=new node<t>(val);
-                newnode->next=prev->next;
-                prev->next=newnode;
+                node<t>* newnode = new node<t>(val);
+                newnode->next = prev->next;
+                prev->next = newnode;
             }
-
         }
     }
-    int count(){
-        node<t>*temp=head;
-        int cnt=0;
-        while(temp!= nullptr){
+    
+    // Count the number of nodes in the doubly linked list
+    int count() {
+        node<t>* temp = head;
+        int cnt = 0;
+        while (temp != nullptr) {
             cnt++;
-            temp=temp->next;
+            temp = temp->next;
         }
         return cnt;
     }
-    void display(){
-        node<t>*temp=head;
-        while(temp!= nullptr){
-            cout<<temp->data<<" ";
-            temp=temp->next;
+    
+    // Display the doubly linked list in ascending order
+    void display() {
+        node<t>* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
-    void displaydcs(){
-        node<t>*temp=last;
-        while(temp!= nullptr){
-            cout<<temp->data<<" ";
-            temp=temp->prev;
+    
+    // Display the doubly linked list in descending order
+    void displaydcs() {
+        node<t>* temp = last;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->prev;
         }
-        cout<<endl;
+        cout << endl;
     }
-    int search(int val){
-        int f=0;
-        if(!isfound(val))
+    
+    // Search for a value and return its index
+    int search(int val) {
+        int index = 0;
+        if (!isfound(val))
             return -1;
-        node<t>*temp=head;
-        while(temp->data!=val){
-            f++;
-            temp=temp->next;
+        node<t>* temp = head;
+        while (temp->data != val) {
+            index++;
+            temp = temp->next;
         }
-        return f;
+        return index;
     }
-    void deletefirst(){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else{
-            node<t>*temp=head;
-            head=head->next;
-            head->prev= nullptr;
+    
+    // Delete the first node in the doubly linked list
+    void deletefirst() {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else {
+            node<t>* temp = head;
+            head = head->next;
+            if (head != nullptr)
+                head->prev = nullptr;
             delete temp;
         }
     }
-    void deletelast(){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else{
-            node<t>*temp=head,*prev= nullptr;
-            while(temp->next!= nullptr){
-                prev=temp;
-                temp=temp->next;
+    
+    // Delete the last node in the doubly linked list
+    void deletelast() {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else {
+            node<t>* temp = head, * prev = nullptr;
+            while (temp->next != nullptr) {
+                prev = temp;
+                temp = temp->next;
             }
-            prev->next=temp->next;
-            last=temp->prev;
+            prev->next = temp->next;
+            last = temp->prev;
             delete temp;
         }
     }
-    void delette(t val){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else if(!isfound(val)){
-            cout<<"the item is not foundd!!\n";
-        }
-        else if(head->data==val){
+    
+    // Delete a node with a specific value
+    void delette(t val) {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else if (!isfound(val)) {
+            cout << "The item is not found!!\n";
+        } else if (head->data == val) {
             deletefirst();
-        }
-        else{
-            node<t>*temp=head,*prev= nullptr;
-            while( temp->data!=val){
-                prev=temp;
-                temp=temp->next;
+        } else {
+            node<t>* temp = head, * prev = nullptr;
+            while (temp->data != val) {
+                prev = temp;
+                temp = temp->next;
             }
-            prev->next=temp->next;
-            temp->next->prev=prev;
-            if(temp->next== nullptr)
-                last=temp->prev;
+            prev->next = temp->next;
+            if (temp->next != nullptr)
+                temp->next->prev = prev;
+            if (temp->next == nullptr)
+                last = temp->prev;
             delete temp;
         }
     }
 };
+
+// Stack class
 template<typename t>
-class stack{
-    node<t>*head;
-    node<t>*top;
-    void insertfirst(t val){
-        node<t>*newnode=new node<t>(val);
-        head=newnode;
+class stack {
+    node<t>* head;  // Head pointer for the stack
+    node<t>* top;   // Top pointer for the stack
+    
+    // Insert a new node at the beginning of the stack
+    void insertfirst(t val) {
+        node<t>* newnode = new node<t>(val);
+        head = newnode;
     }
 
 public:
-    stack(){
-        head=nullptr;
-        top= nullptr;
+    // Constructor
+    stack() {
+        head = nullptr;
+        top = nullptr;
     }
-    bool isempty(){
-        return head== nullptr;
+    
+    // Check if the stack is empty
+    bool isempty() {
+        return head == nullptr;
     }
-    bool isfound(t val){
-        node<t>*temp=head;
-        bool f=0;
-        while(temp!= nullptr){
-            if(temp->data==val){
-                f=1;
+    
+    // Check if a value is found in the stack
+    bool isfound(t val) {
+        node<t>* temp = head;
+        bool found = false;
+        while (temp != nullptr) {
+            if (temp->data == val) {
+                found = true;
                 break;
             }
-            temp=temp->next;
+            temp = temp->next;
         }
-        return f;
+        return found;
     }
 
-    void add(t val){
-        if(isempty()){
+    // Add a new node to the stack
+    void add(t val) {
+        if (isempty()) {
             insertfirst(val);
             return;
         }
-
-        node<t>*temp=head;
-        node<t>*newnode=new node<t>(val);
-        while(temp->next!= nullptr){
-            temp=temp->next;
+        node<t>* temp = head;
+        node<t>* newnode = new node<t>(val);
+        while (temp->next != nullptr) {
+            temp = temp->next;
         }
-        temp->next=newnode;
-        top=newnode;
+        temp->next = newnode;
+        top = newnode;
     }
 
-    int count(){
-        node<t>*temp=head;
-        int cnt=0;
-        while(temp!= nullptr){
+    // Count the number of nodes in the stack
+    int count() {
+        node<t>* temp = head;
+        int cnt = 0;
+        while (temp != nullptr) {
             cnt++;
-            temp=temp->next;
+            temp = temp->next;
         }
         return cnt;
     }
-    void display(){
-        node<t>*temp=head;
-        while(temp!= nullptr){
-            cout<<temp->data<<" ";
-            temp=temp->next;
+    
+    // Display the stack
+    void display() {
+        node<t>* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
 
-    void remove(){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else{
-            node<t>*temp=head,*prev= nullptr;
-            while(temp->next!= nullptr){
-                prev=temp;
-                temp=temp->next;
+    // Remove the top node from the stack
+    void remove() {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else {
+            node<t>* temp = head, * prev = nullptr;
+            while (temp->next != nullptr) {
+                prev = temp;
+                temp = temp->next;
             }
-            prev->next=temp->next;
-            top=prev;
+            prev->next = temp->next;
+            top = prev;
             delete temp;
         }
     }
 
-    int search(int val){
-        int f=0;
-        if(!isfound(val))
+    // Search for a value and return its index
+    int search(int val) {
+        int index = 0;
+        if (!isfound(val))
             return -1;
-        node<t>*temp=head;
-        while(temp->data!=val){
-            f++;
-            temp=temp->next;
+        node<t>* temp = head;
+        while (temp->data != val) {
+            index++;
+            temp = temp->next;
         }
-        return f;
+        return index;
     }
-    t gettop(){
-        if(top== nullptr)
+    
+    // Get the value of the top node
+    t gettop() {
+        if (top == nullptr)
             return -1;
         else
             return top->data;
     }
 };
+
+// Queue class
 template<typename t>
-class queue{
-    node<t>*head;
-    void insertfirst(t val){
-        node<t>*newnode=new node<t>(val);
-        head=newnode;
+class queue {
+    node<t>* head;  // Head pointer for the queue
+    
+    // Insert a new node at the beginning of the queue
+    void insertfirst(t val) {
+        node<t>* newnode = new node<t>(val);
+        head = newnode;
     }
 public:
-    queue(){
-        head=nullptr;
+    // Constructor
+    queue() {
+        head = nullptr;
     }
-    bool isempty(){
-        return head== nullptr;
+    
+    // Check if the queue is empty
+    bool isempty() {
+        return head == nullptr;
     }
-    bool isfound(t val){
-        node<t>*temp=head;
-        bool f=0;
-        while(temp!= nullptr){
-            if(temp->data==val){
-                f=1;
+    
+    // Check if a value is found in the queue
+    bool isfound(t val) {
+        node<t>* temp = head;
+        bool found = false;
+        while (temp != nullptr) {
+            if (temp->data == val) {
+                found = true;
                 break;
             }
-            temp=temp->next;
+            temp = temp->next;
         }
-        return f;
+        return found;
     }
 
-    void add(t val){
-        if(isempty()){
+    // Add a new node to the queue
+    void add(t val) {
+        if (isempty()) {
             insertfirst(val);
             return;
         }
-        node<t>*temp=head;
-        node<t>*newnode=new node<t>(val);
-        while(temp->next!= nullptr){
-            temp=temp->next;
+        node<t>* temp = head;
+        node<t>* newnode = new node<t>(val);
+        while (temp->next != nullptr) {
+            temp = temp->next;
         }
-        temp->next=newnode;
-
+        temp->next = newnode;
     }
 
-    int count(){
-        node<t>*temp=head;
-        int cnt=0;
-        while(temp!= nullptr){
+    // Count the number of nodes in the queue
+    int count() {
+        node<t>* temp = head;
+        int cnt = 0;
+        while (temp != nullptr) {
             cnt++;
-            temp=temp->next;
+            temp = temp->next;
         }
         return cnt;
     }
-    void display(){
-        node<t>*temp=head;
-        while(temp!= nullptr){
-            cout<<temp->data<<" ";
-            temp=temp->next;
+    
+    // Display the queue
+    void display() {
+        node<t>* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
-    void remove(){
-        if(isempty()){
-            cout<<"list is empty\n";
-        }
-        else{
-            node<t>*temp=head;
-            head=head->next;
+    
+    // Remove the front node from the queue
+    void remove() {
+        if (isempty()) {
+            cout << "List is empty\n";
+        } else {
+            node<t>* temp = head;
+            head = head->next;
             delete temp;
         }
     }
 
-    int search(int val){
-        int f=0;
-        if(!isfound(val))
+    // Search for a value and return its index
+    int search(int val) {
+        int index = 0;
+        if (!isfound(val))
             return -1;
-        node<t>*temp=head;
-        while(temp->data!=val){
-            f++;
-            temp=temp->next;
+        node<t>* temp = head;
+        while (temp->data != val) {
+            index++;
+            temp = temp->next;
         }
-        return f;
+        return index;
     }
-    t getfront(){
+    
+    // Get the value of the front node
+    t getfront() {
         return head->data;
     }
-
 };
+
+// Priority Queue class
 template<typename t>
-class priorityqueue{
-    node<t>*head;
+class priorityqueue {
+    node<t>* head;  // Head pointer for the priority queue
 public:
-    priorityqueue(){
-        head= nullptr;
+    // Constructor
+    priorityqueue() {
+        head = nullptr;
     }
-    bool isempty(){
-        return head== nullptr;
+    
+    // Check if the priority queue is empty
+    bool isempty() {
+        return head == nullptr;
     }
-    void add(t val){
-        if(isempty()){
-            head=new node(val);
+    
+    // Add a new node to the priority queue
+    void add(t val) {
+        if (isempty()) {
+            head = new node<t>(val);
             return;
-        }
-        else{
-            node<t>* newnode=new node(val);
-            node<t>*temp=head, *prv= nullptr;
-            if(val<head->data){
-                newnode->next=head;
-                head=newnode;
+        } else {
+            node<t>* newnode = new node<t>(val);
+            node<t>* temp = head, * prev = nullptr;
+            if (val < head->data) {
+                newnode->next = head;
+                head = newnode;
                 return;
             }
-            while(temp!= nullptr&&val>=temp->data){
-                prv=temp;
-                temp=temp->next;
+            while (temp != nullptr && val >= temp->data) {
+                prev = temp;
+                temp = temp->next;
             }
-
-            newnode->next=temp;
-            prv->next=newnode;
+            newnode->next = temp;
+            prev->next = newnode;
         }
     }
-    void display(){
-        node<t>*temp=head;
-        while(temp!= nullptr){
-            cout<<temp->data<<" ";
-            temp=temp->next;
+    
+    // Display the priority queue
+    void display() {
+        node<t>* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
 };
+
 int main() {
-    priorityqueue <int>l;
+    // Priority Queue demonstration
+    priorityqueue<int> l;
     l.add(20);
     l.add(50);
     l.add(10);
@@ -592,5 +669,5 @@ int main() {
     l.add(15);
     l.display();
 
-
+    return 0;
 }

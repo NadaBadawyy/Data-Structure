@@ -1,0 +1,108 @@
+*==*/Algorithm NAME/*==*
+INSERTION SORT
+****STUDENT****
+Name: Ali
+GPA: 3.5
+ID: 3541
+****STUDENT****
+Name: Mariam
+GPA: 3.7
+ID: 69712
+****STUDENT****
+Name: Mohamed Kamal
+GPA: 2.2
+ID: 97848
+****STUDENT****
+Name: Sara Ahmed
+GPA: 3.1
+ID: 78697
+*==*/Algorithm NAME/*==*
+MERGE SORT
+****STUDENT****
+Name: Ali
+GPA: 3.5
+ID: 3541
+****STUDENT****
+Name: Mariam
+GPA: 3.7
+ID: 69712
+****STUDENT****
+Name: Mohamed Kamal
+GPA: 2.2
+ID: 97848
+****STUDENT****
+Name: Sara Ahmed
+GPA: 3.1
+ID: 78697
+*==*/Algorithm NAME/*==*
+QUICK SORT
+****STUDENT****
+Name: Ali
+GPA: 3.5
+ID: 3541
+****STUDENT****
+Name: Mariam
+GPA: 3.7
+ID: 69712
+****STUDENT****
+Name: Mohamed Kamal
+GPA: 2.2
+ID: 97848
+****STUDENT****
+Name: Sara Ahmed
+GPA: 3.1
+ID: 78697
+*==*/Algorithm NAME/*==*
+SELECTION SORT
+****STUDENT****
+Name: Ali
+GPA: 3.5
+ID: 3541
+****STUDENT****
+Name: Mariam
+GPA: 3.7
+ID: 69712
+****STUDENT****
+Name: Mohamed Kamal
+GPA: 2.2
+ID: 97848
+****STUDENT****
+Name: Sara Ahmed
+GPA: 3.1
+ID: 78697
+*==*/Algorithm NAME/*==*
+SHELL SORT
+****STUDENT****
+Name: Ali
+GPA: 3.5
+ID: 3541
+****STUDENT****
+Name: Mariam
+GPA: 3.7
+ID: 69712
+****STUDENT****
+Name: Mohamed Kamal
+GPA: 2.2
+ID: 97848
+****STUDENT****
+Name: Sara Ahmed
+GPA: 3.1
+ID: 78697
+*==*/Algorithm NAME/*==*
+BUBBLE SORT
+****STUDENT****
+Name: Ali
+GPA: 3.5
+ID: 3541
+****STUDENT****
+Name: Mariam
+GPA: 3.7
+ID: 69712
+****STUDENT****
+Name: Mohamed Kamal
+GPA: 2.2
+ID: 97848
+****STUDENT****
+Name: Sara Ahmed
+GPA: 3.1
+ID: 78697
